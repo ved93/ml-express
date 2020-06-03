@@ -1,3 +1,6 @@
+import pandas_profiling
+
+
 def create_summary_report(df):
     # Data profiling/EDA
     profile = pandas_profiling.ProfileReport(
