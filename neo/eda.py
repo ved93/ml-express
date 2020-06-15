@@ -20,7 +20,6 @@ def create_summary_report(df):
     profile.to_file(output_file="../reports/data_audit_report.html")
 
 
-
 def reduce_mem_usage(df, verbose=True):
     numerics = ["int16", "int32", "int64", "float16", "float32", "float64"]
     start_mem = df.memory_usage(deep=True).sum() / 1024 ** 2
@@ -170,7 +169,7 @@ def print_quantiles(data_frame, column):
     print(f"{column} Quantiles:")
     print(
         data_frame[column].quantile(
-            [0.01, 0.025, 0.1, 0.25, 0.5, 0.75, 0.9, 0.975, 0.99]
+            [0.0, 0.01, 0.025, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.975, 0.99, 1.0]
         )
     )
 
