@@ -1,4 +1,3 @@
-
 # Created by: abhi
 # Created on: 6/4/20
 
@@ -13,8 +12,8 @@ from scipy.stats import norm
 warnings.filterwarnings("ignore")
 
 
-def density_plot(data_frame, column):
-    sns.distplot(data_frame[column])
+def density_plot(data_frame, column, kde_kws=None):
+    sns.distplot(data_frame[column], kde_kws=kde_kws)
     plt.show()
     # skewness and kurtosis
     print("Skewness: %f" % data_frame[column].skew())
