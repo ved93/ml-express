@@ -174,6 +174,94 @@ def print_quantiles(data_frame, column):
     )
 
 
+def time_series_plot(df):
+    """Given dataframe, generate times series plot of numeric data by daily, monthly and yearly frequency"""
+    print(
+        "\nTo check time series of numeric data  by daily, monthly and yearly frequency"
+    )
+    if len(df.select_dtypes(include="datetime64").columns) > 0:
+        for col in df.select_dtypes(include="datetime64").columns:
+            for p in ["D", "M", "Y"]:
+                if p == "D":
+                    print("Plotting daily data")
+                elif p == "M":
+                    print("Plotting monthly data")
+                else:
+                    print("Plotting yearly data")
+                for col_num in df.select_dtypes(include=np.number).columns:
+                    __ = df.copy()
+                    __ = __.set_index(col)
+                    __T = __.resample(p).sum()
+                    ax = __T[[col_num]].plot()
+                    ax.set_ylim(bottom=0)
+                    ax.get_yaxis().set_major_formatter(
+                        matplotlib.ticker.FuncFormatter(
+                            lambda x, p: format(int(x), ",")
+                        )
+                    )
+                    plt.show()
+
+
+def numeric_eda(df, hue=None):
+    """Given dataframe, generate EDA of numeric data"""
+    print("\nTo check: \nDistribution of numeric data")
+    display(df.describe().T)
+    columns = df.select_dtypes(include=np.number).columns
+    figure = plt.figure(figsize=(20, 10))
+    figure.add_subplot(1, len(columns), 1)
+    for index, col in enumerate(columns):
+        if index > 0:
+            figure.add_subplot(1, len(columns), index + 1)
+        sns.boxplot(y=col, data=df, boxprops={"facecolor": "None"})
+    figure.tight_layout()
+    plt.show()
+
+    if len(df.select_dtypes(include="category").columns) > 0:
+        for col_num in df.select_dtypes(include=np.number).columns:
+            for col in df.select_dtypes(include="category").columns:
+                fig = sns.catplot(
+                    x=col, y=col_num, kind="violin", data=df, height=5, aspect=2
+                )
+                fig.set_xticklabels(rotation=90)
+                plt.show()
+
+    # Plot the pairwise joint distributions
+    print("\nTo check pairwise joint distribution of numeric data")
+    if hue == None:
+        sns.pairplot(df.select_dtypes(include=np.number))
+    else:
+        sns.pairplot(df.select_dtypes(include=np.number).join(df[[hue]]), hue=hue)
+    plt.show()
+
+
+def top5(df):
+    """Given dataframe, generate top 5 unique values for non-numeric data"""
+    columns = df.select_dtypes(include=["object", "category"]).columns
+    for col in columns:
+        print("Top 5 unique values of " + col)
+        print(
+            df[col]
+            .value_counts()
+            .reset_index()
+            .rename(columns={"index": col, col: "Count"})[
+                : min(5, len(df[col].value_counts()))
+            ]
+        )
+        print(" ")
+
+
+def categorical_eda(df, hue=None):
+    """Given dataframe, generate EDA of categorical data"""
+    print("\nTo check: \nUnique count of non-numeric data\n")
+    print(df.select_dtypes(include=["object", "category"]).nunique())
+    top5(df)
+    # Plot count distribution of categorical data
+    for col in df.select_dtypes(include="category").columns:
+        fig = sns.catplot(x=col, kind="count", data=df, hue=hue)
+        fig.set_xticklabels(rotation=90)
+        plt.show()
+
+
 if __name__ == "__main__":
     df = pd.read_csv("../input/train_house_price.csv")
     # gen_eda(df)
