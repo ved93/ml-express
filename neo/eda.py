@@ -177,7 +177,7 @@ def print_quantiles(data_frame, column):
 def time_series_plot(df):
     """Given dataframe, generate times series plot of numeric data by daily, monthly and yearly frequency"""
     print(
-        "\nTo check time series of numeric data  by daily, monthly and yearly frequency"
+        "\nTo check time  series of numeric data  by daily, monthly and yearly frequency"
     )
     if len(df.select_dtypes(include="datetime64").columns) > 0:
         for col in df.select_dtypes(include="datetime64").columns:
