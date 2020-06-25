@@ -1,5 +1,5 @@
 # from .imports import *
-# Directly copied from fast.ai's old functions which are not supported anymore.
+# Directly copied from fast.ai's old functions which are not supported anymore
 
 from IPython.lib.deepreload import reload as dreload
 import PIL, os, numpy as np, math, collections, threading, json  # , bcolz, random, scipy, cv2
