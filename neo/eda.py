@@ -2,6 +2,7 @@ import pandas_profiling
 
 
 import pandas as pd
+import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -10,7 +11,6 @@ from scipy import stats
 from scipy.stats import norm
 
 warnings.filterwarnings("ignore")
-
 
 def create_summary_report(df):
     # Data profiling/EDA
@@ -205,7 +205,7 @@ def time_series_plot(df):
 def numeric_eda(df, hue=None):
     """Given dataframe, generate EDA of numeric data"""
     print("\nTo check: \nDistribution of numeric data")
-    display(df.describe().T)
+    pd.display(df.describe().T)
     columns = df.select_dtypes(include=np.number).columns
     figure = plt.figure(figsize=(20, 10))
     figure.add_subplot(1, len(columns), 1)
