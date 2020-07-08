@@ -10,6 +10,9 @@ import warnings
 from scipy import stats
 from scipy.stats import norm
 
+import os
+
+
 warnings.filterwarnings("ignore")
 
 def create_summary_report(df):
@@ -17,7 +20,28 @@ def create_summary_report(df):
     profile = pandas_profiling.ProfileReport(
         df, title="Data Audit Report \nAuthor: Ved"
     )
-    profile.to_file(output_file="../reports/data_audit_report.html")
+
+    if not os.path.exists('./reports/data_audit_report.html'):
+        os.makedirs('reports')
+
+
+    profile.to_file(output_file="./reports/data_audit_report.html")
+
+def check_missing_data(df):
+    flag=df.isna().sum().any()
+    if flag==True:
+        total = df.isnull().sum()
+        percent = (df.isnull().sum()*100)/(df.isnull().count())
+        output = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
+        data_type = []
+        # written by Ved
+        for col in df.columns:
+            dtype = str(df[col].dtype)
+            data_type.append(dtype)
+        output['Types'] = data_type
+        return(np.transpose(output))
+    else:
+        return(False)
 
 
 def reduce_mem_usage(df, verbose=True):

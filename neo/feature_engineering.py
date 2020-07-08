@@ -6,14 +6,15 @@ import PIL, os, numpy as np, math, collections, threading, json  # , bcolz, rand
 import pandas as pd, pickle, sys, itertools, string, sys, re, datetime, time, shutil, copy
 import seaborn as sns, matplotlib
 
-# import IPython, graphviz, sklearn_pandas, sklearn, warnings, pdb
+import IPython, graphviz, sklearn_pandas, sklearn, warnings, pdb
 import contextlib
 from abc import abstractmethod
 from glob import glob, iglob
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from itertools import chain
 from functools import partial
-from collections import Iterable, Counter, OrderedDict
+from collections import Counter, OrderedDict
+from collections.abc import Iterable
 from isoweek import Week
 from pandas_summary import DataFrameSummary
 from IPython.lib.display import FileLink
@@ -38,6 +39,23 @@ from sklearn.impute._base import SimpleImputer as Imputer
 from pandas.api.types import is_string_dtype, is_numeric_dtype, is_categorical_dtype
 from sklearn.ensemble import forest
 from sklearn.tree import export_graphviz
+
+
+
+
+def get_dummies(df, categorical_cols):
+    df_all = pd.get_dummies(df,
+                            prefix=categorical_cols,
+                            columns=categorical_cols,
+                            drop_first=True)
+    return df_all
+
+
+
+
+
+
+
 
 
 def set_plot_sizes(sml, med, big):
@@ -558,5 +576,5 @@ def get_nn_mappers(df, cat_vars, contin_vars):
 
     # list of tuples, containing variable and instance of a transformer for that variable
     # for categoricals, use LabelEncoder to map to integers. For continuous, standardize
-    cat_maps = [(o, LabelEncoder()) for o in cat_vars]
-    contin_maps = [([o], StandardScaler()) for o in contin_vars]
+    # cat_maps = [(o, LabelEncoder()) for o in cat_vars]
+    # contin_maps = [([o], StandardScaler()) for o in contin_vars]
