@@ -1,9 +1,15 @@
 from scipy.stats import chi2_contingency
 #stolen from https://stackoverflow.com/questions/46498455/categorical-features-correlation/46498792#46498792
 #https://towardsdatascience.com/the-search-for-categorical-correlation-a1cf7f1888c9
+#https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_V
+#http://www.people.vcu.edu/~pdattalo/702SuppRead/MeasAssoc/NominalAssoc.html
+#for binary var, cramers v = phi so we will use always cramers v 
 
 
 from .imports import *
+import matplotlib.pyplot as plt
+import seaborn as sns
+color = sns.color_palette()
 
 import warnings
 
@@ -72,3 +78,61 @@ def get_corr_df_cat_cont(cat_cols,num_cols,train_df_new):
     dfcramers = pd.DataFrame(cramers_results, columns = num_cols, index =cat_cols)
 
     return dfcramers
+
+
+
+def get_corr_df_target(df,num_cols):
+    
+    # lets check correlation
+
+    from scipy.stats import spearmanr
+    import warnings
+    warnings.filterwarnings("ignore")
+
+
+
+    #let us first take the 'float' variables alone
+    # and then get the correlation with the target variable to see how they are related.
+    # Let us just impute the missing values with mean values to compute correlation coefficients #
+    mean_values = df.mean(axis=0)
+    train_df_new = df.fillna(mean_values )
+
+    # Now let us look at the correlation coefficient of each of these variables #
+    #logerror is the target var
+    x_cols = [col for col in num_cols if col not in ['target','unique_id']] # if 'n' in col
+
+
+    labels = []
+    values = []
+    for col in x_cols:
+        labels.append(col)
+        values.append(np.corrcoef(train_df_new[col].values, train_df_new.target.values)[0,1])
+    corr_df = pd.DataFrame({'col_labels':labels, 'corr_values':values})
+    corr_df = corr_df.sort_values(by='corr_values')
+    print(corr_df)
+
+    ind = np.arange(len(labels))
+    width = 0.9
+    fig, ax = plt.subplots(figsize=(8,6))
+    # rects = ax.barh(ind, np.array(corr_df.corr_values.values), color='y')
+    # # sns.barplot(x=ind, y=np.array(corr_df.corr_values.values))
+    # ax.set_yticks(ind)
+    # ax.set_yticklabels(corr_df.col_labels.values, rotation='horizontal')
+    # ax.set_xlabel("Correlation coefficient")
+    # ax.set_title("Correlation coefficient of the variables")
+    # #autolabel(rects)
+    # plt.show()
+
+
+
+    ax=sns.barplot(y=ind, x=np.array(corr_df.corr_values.values) , orient='h')
+    ax.set_yticks(ind)
+    ax.set_yticklabels(corr_df.col_labels.values, rotation='horizontal')
+    ax.set_xlabel("Correlation coefficient")
+    ax.set_title("Correlation coefficient of the variables with Target")
+    #autolabel(rects)
+    plt.show()
+    
+    return corr_df
+
+    
