@@ -13,7 +13,7 @@ color = sns.color_palette()
 
 import warnings
 
-
+# @measure_time
 
 def cramers_V(var1,var2) :
     crosstab =np.array(pd.crosstab(var1,var2, rownames=None, colnames=None)) # Cross table building
