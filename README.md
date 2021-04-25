@@ -1,4 +1,23 @@
-# Neo
+# ml_express
 
-WIP: This library is modified library which I developed in UC. This aims to make data building, cleaning and machine learning much much faster. I am planning to release full-module. Stay-tuned.
-.
+A Python library for day to day data analysis and machine learning.
+This aims to make data building, cleaning and machine learning much much faster.
+
+^This is beta release. Some functionality might break. 
+
+## Installation
+
+pip install ml-express
+
+## Usage
+
+```python
+import ml_express as mlx
+from ml_express import eda
+
+# this will create an html report and report will be saved in report folder in working directory
+eda.create_summary_report(df)
+
+```
+
+Please feel free to raise PR or issues. 

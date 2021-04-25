@@ -1,0 +1,12 @@
+Metadata-Version: 1.0
+Name: ml-express
+Version: 0.1.0
+Summary: A Python library for day to day data analysis and machine learning.
+Home-page: https://github.com/ved93/ml-express
+Author: Ved
+Author-email: vpved93@gmail.com
+License: License :: OSI Approved :: MIT License
+Description: # ml_express
+        A Python library for day to day data analysis and machine learning.
+        
+Platform: UNKNOWN

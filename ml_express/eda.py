@@ -15,10 +15,10 @@ import os
 
 warnings.filterwarnings("ignore")
 
-def create_summary_report(df):
+def create_summary_report(df,name = None):
     # Data profiling/EDA
     profile = pandas_profiling.ProfileReport(
-        df, title="Data Audit Report \nAuthor: Ved"
+        df, title="Data Audit Report \nAuthor: {}".format(name)
     )
 
     if not os.path.exists('./reports/data_audit_report.html'):
