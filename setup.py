@@ -30,9 +30,8 @@ setup(
                         'pandas_profiling==2.11.0',
                         'matplotlib>=3.0.0',
                         'joblib>=0.13.2',
-                        'Pillow==8.1.2',
+                        'Pillow>=8.2.0',
                         'seaborn>=0.11.1',
-                        'pandas-summary==0.0.7',
                         'graphviz==0.16',
                         'sklearn-pandas>=1.8.0', #2.1.0
                         'isoweek==1.3.3',
