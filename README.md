@@ -20,4 +20,13 @@ eda.create_summary_report(df)
 
 ```
 
-Please feel free to raise PR or issues. 
+
+## Contributing
+Contributions are very welcome. Please feel free to submit PR. 
+
+
+## License
+Distributed under the terms of the MIT license, "ml-express" is free and open source software
+
+## Issues
+If you encounter any problems, please file an issue along with a detailed description.
