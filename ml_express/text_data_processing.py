@@ -4,7 +4,9 @@
 # In this analysis, I will use an English word list from https://github.com/dwyl/english-words and pre-process the text by removing hashtags, usernames and non-alphanumeric symbols.
 
 import pandas as pd
+# import numpy as np
 import re
+import string
 # words = pd.read_table('https://raw.githubusercontent.com/dwyl/english-words/master/words.txt')
 # words.columns=['word']
 # words = words['word'].str.lower().values.tolist()

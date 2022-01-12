@@ -1,6 +1,8 @@
 
 from sklearn.impute import SimpleImputer
-
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 import scipy.stats as stats
@@ -37,15 +39,15 @@ def scale_feature(df,features,strategy='minmax'):
 
 
 if __name__ == "__main__":
+    impute_plot()
+    # clean_wine_df = remove_outlier_using_z_score(wine_df,'price')
+    # compare_plot([wine_df,clean_wine_df],x='points',y='price',subtitle='Boxplot comparison (above:original,below:remove_outlier)',figsize=(25,10))
+    # wine_df = clean_wine_df
 
-    clean_wine_df = remove_outlier_using_z_score(wine_df,'price')
-    compare_plot([wine_df,clean_wine_df],x='points',y='price',subtitle='Boxplot comparison (above:original,below:remove_outlier)',figsize=(25,10))
-    wine_df = clean_wine_df
+    # salary_df['minmax_satisfaction_level'] = scale_feature(salary_df,['satisfaction_level'],strategy='minmax')
+    # salary_df['standardized_satisfaction_level'] = scale_feature(salary_df,['satisfaction_level'],strategy='standard')
+    # salary_df['l2_satisfaction_level'] = scale_feature(salary_df,['satisfaction_level'],strategy='l2')
 
-    salary_df['minmax_satisfaction_level'] = scale_feature(salary_df,['satisfaction_level'],strategy='minmax')
-    salary_df['standardized_satisfaction_level'] = scale_feature(salary_df,['satisfaction_level'],strategy='standard')
-    salary_df['l2_satisfaction_level'] = scale_feature(salary_df,['satisfaction_level'],strategy='l2')
-
-    draw_plot(salary_df,features=['minmax_satisfaction_level','standardized_satisfaction_level','l2_satisfaction_level']
-            ,subtitle='Left:{},Mid:{},Right:{} satisfaction level'.format('minmax','standardized','l2')
-            ,type='distplot')
+    # draw_plot(salary_df,features=['minmax_satisfaction_level','standardized_satisfaction_level','l2_satisfaction_level']
+    #         ,subtitle='Left:{},Mid:{},Right:{} satisfaction level'.format('minmax','standardized','l2')
+    #         ,type='distplot')
