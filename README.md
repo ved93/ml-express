@@ -3,7 +3,7 @@
 A Python library for day to day data analysis and machine learning.
 This aims to make data building, cleaning and machine learning much much faster.
 
-^This is beta release. Some functionality might break. 
+
 
 ## Installation
 

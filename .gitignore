@@ -1,4 +1,5 @@
 release_steps.md
+feature_plan.py
 build/lib/
 dist/
 ml_express/__pycache__/__init__.cpython-38.pyc

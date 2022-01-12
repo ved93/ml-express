@@ -27,14 +27,14 @@ setup(
                         'numpy>=1.16.2',
                         'pandas>=0.24',
                         'scikit-learn>=0.23.2',
-                        'pandas_profiling==2.11.0',
+                        'pandas_profiling>=2.11.0',
                         'matplotlib>=3.0.0',
                         'joblib>=0.13.2',
                         'Pillow>=8.2.0',
-                        'seaborn>=0.11.1',
-                        'graphviz==0.16',
+                        'seaborn>=0.11.0',
+                        'graphviz>=0.16',
                         'sklearn-pandas>=1.8.0', #2.1.0
-                        'isoweek==1.3.3',
-                        'pandas-summary==0.0.7']
+                        # 'isoweek==1.3.3',
+                        'pandas-summary>=0.0.7']
 
 )
